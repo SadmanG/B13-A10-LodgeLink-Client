@@ -1,8 +1,12 @@
+"use client";
+
 import React from 'react';
+import { motion } from "motion/react"
 
 const SearchBanner = () => {
     return (
-        <div
+        <motion.div
+            initial={{ scale: 0 }} animate={{ scale: 1 }}
             className="hero min-h-[85vh] relative"
             style={{
                 // High-resolution warm forest cabin that matches the emerald brand theme
@@ -92,7 +96,7 @@ const SearchBanner = () => {
                 </div>
 
             </div>
-        </div>
+        </motion.div>
     );
 };
 

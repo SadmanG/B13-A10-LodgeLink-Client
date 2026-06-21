@@ -1,14 +1,35 @@
 "use client";
 
+import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 const Navbar = () => {
+    const {
+        data: session,
+        isPending, //loading state
+        //error, //error object
+        //refetch //refetch the session
+    } = authClient.useSession();
+    const user = session?.user;
+
+    //Signout
+    const router = useRouter();
+    const handleSignOut = async () => {
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    router.push("/login"); // redirect to login page
+                },
+            },
+        });
+    }
+
     // Toggle this boolean to simulate logged-in or logged-out states
-    const isLoggedIn = true; 
-    
+    const isLoggedIn = user ? true : false;
+
     // Get the current active URL path
     const pathname = usePathname();
 
@@ -20,13 +41,13 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar bg-emerald-900 text-stone-100 shadow-md">
+        <div className="navbar bg-emerald-900 text-stone-100 shadow-md relative">
             {/* NAVBAR START: Logo & Brand Name */}
-            <div className="navbar-start">
+            <div className="navbar-start z-50">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden text-stone-100 hover:bg-emerald-800">
-                        <svg xmlns="http://w3.org" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> 
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> 
+                        <svg xmlns="http://w3.org" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </div>
                     {/* Mobile Dropdown Menu */}
@@ -54,36 +75,39 @@ const Navbar = () => {
             </div>
 
             {/* NAVBAR END: Authentication & Profile Action Area */}
-            <div className="navbar-end gap-2">
+            <div className="navbar-end gap-2 z-50">
                 {!isLoggedIn ? (
                     <>
                         <Link href="/login" className={getLinkClass('/login', 'btn btn-ghost')}>Login</Link>
                         <Link href="/register" className="btn bg-teal-500 hover:bg-teal-600 text-stone-900 font-bold border-none shadow-sm">Register</Link>
                     </>
                 ) : (
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar ring-2 ring-emerald-600 hover:ring-teal-400 transition-all">
-                            <div className="w-10 rounded-full">
-                                <Image
-                                    height={100}
-                                    width={100}
-                                    alt="User Profile Avatar"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    <div className='flex'>
+                        <h2 className='mr-2 mt-2'>Hi, {user?.name}</h2>
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar ring-2 ring-emerald-600 hover:ring-teal-400 transition-all">
+                                <div className="w-10 rounded-full">
+                                    <Image
+                                        height={100}
+                                        width={100}
+                                        alt="User Profile Avatar"
+                                        src={user?.image} />
+                                </div>
                             </div>
+                            <ul
+                                tabIndex="-1"
+                                className="menu menu-sm dropdown-content bg-emerald-800 text-stone-100 rounded-box z-1 mt-3 w-52 p-2 shadow-xl border border-emerald-700">
+                                <li>
+                                    <Link href="/profile" className={getLinkClass('/profile', 'justify-between')}>
+                                        Profile
+                                        <span className="badge bg-teal-400 text-stone-900 border-none font-bold text-xs">Host</span>
+                                    </Link>
+                                </li>
+                                <li><Link href="/settings" className={getLinkClass('/settings', '')}>Settings</Link></li>
+                                <div className="divider border-emerald-700 my-1 opacity-50"></div>
+                                <li className="btn text-red-400 hover:bg-red-950/50 hover:text-red-300 font-medium" onClick={handleSignOut}>Logout</li>
+                            </ul>
                         </div>
-                        <ul
-                            tabIndex="-1"
-                            className="menu menu-sm dropdown-content bg-emerald-800 text-stone-100 rounded-box z-1 mt-3 w-52 p-2 shadow-xl border border-emerald-700">
-                            <li>
-                                <Link href="/profile" className={getLinkClass('/profile', 'justify-between')}>
-                                    Profile
-                                    <span className="badge bg-teal-400 text-stone-900 border-none font-bold text-xs">Host</span>
-                                </Link>
-                            </li>
-                            <li><Link href="/settings" className={getLinkClass('/settings', '')}>Settings</Link></li>
-                            <div className="divider border-emerald-700 my-1 opacity-50"></div>
-                            <li><Link href="/logout" className="text-red-400 hover:bg-red-950/50 hover:text-red-300 font-medium">Logout</Link></li>
-                        </ul>
                     </div>
                 )}
             </div>

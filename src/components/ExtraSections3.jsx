@@ -1,6 +1,9 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from "motion/react"
 
 const ExtraSections3 = () => {
     // Mock data for recently added cabin listings
@@ -40,7 +43,7 @@ const ExtraSections3 = () => {
     return (
         <section className="bg-emerald-900 py-16 px-4 sm:px-6 lg:px-8 border-t border-emerald-800">
             <div className="max-w-6xl mx-auto">
-                
+
                 {/* Section Header Element */}
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
                     <div>
@@ -60,10 +63,13 @@ const ExtraSections3 = () => {
                 </div>
 
                 {/* Properties Showcase Cards Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {newProperties.map((property) => (
-                        <div 
-                            key={property.id} 
+                        <motion.div
+                            whileHover={{ scale: 1.15 }}
+                            whileTap={{ scale: 0.95 }}
+                            key={property.id}
                             className="bg-emerald-950/50 rounded-2xl overflow-hidden border border-emerald-800/60 shadow-xl flex flex-col group transition-all duration-300 hover:shadow-2xl hover:border-emerald-700/60"
                         >
                             {/* Image Frame Wrapper */}
@@ -117,15 +123,15 @@ const ExtraSections3 = () => {
                                         <span className="text-2xl font-black text-white">${property.price}</span>
                                         <span className="text-stone-400 text-xs font-medium"> / night</span>
                                     </div>
-                                    <Link 
-                                        href={`/properties/${property.id}`} 
+                                    <Link
+                                        href={`/properties/${property.id}`}
                                         className="btn btn-sm bg-teal-500 hover:bg-teal-600 text-stone-900 border-none font-bold shadow-md tracking-wide px-4 rounded-xl transition-all"
                                     >
                                         Book Stay
                                     </Link>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
