@@ -100,7 +100,14 @@ const Navbar = () => {
                                 <li>
                                     <Link href="/profile" className={getLinkClass('/profile', 'justify-between')}>
                                         Profile
-                                        <span className="badge bg-teal-400 text-stone-900 border-none font-bold text-xs">Host</span>
+                                        <span className={`badge border-none font-bold text-xs ${user?.role === 'admin' ? 'bg-amber-400 text-stone-900' :
+                                                user?.role === 'owner' ? 'bg-teal-400 text-stone-900' :
+                                                    'bg-stone-500 text-stone-100' // Default style for tenant
+                                            }`}>
+                                            {user?.role === 'admin' && 'Admin'}
+                                            {user?.role === 'owner' && 'Owner'}
+                                            {user?.role === 'tenant' && 'Tenant'}
+                                        </span>
                                     </Link>
                                 </li>
                                 <li><Link href="/settings" className={getLinkClass('/settings', '')}>Settings</Link></li>
