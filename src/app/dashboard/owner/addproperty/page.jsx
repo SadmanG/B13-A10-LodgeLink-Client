@@ -5,9 +5,13 @@ import { useRouter } from 'next/navigation';
 import toast from "react-hot-toast";
 import React from 'react';
 import { createProperty } from '@/lib/actions/properties';
+import { authClient } from "@/lib/auth-client";
 
 const AddPropertyPage = () => {
     const router = useRouter();
+
+    const { data: session } = authClient.useSession();
+    const currentUserId = session?.user?._id || session?.user?.id;
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +28,8 @@ const AddPropertyPage = () => {
             bathrooms: Number(baseData.bathrooms),
             propertySize: Number(baseData.propertySize),
             amenities: amenities,
-            status: "approved" // Keeps listing instantly available for testing public routes
+            status: "approved", // Keeps listing instantly available for testing public routes
+            ownerId: currentUserId
         };
 
         delete propertyData['amenities[]'];

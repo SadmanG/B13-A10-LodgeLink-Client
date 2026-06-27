@@ -33,10 +33,10 @@ const Navbar = () => {
     // Get the current active URL path
     const pathname = usePathname();
 
-    // Helper function to apply active styles conditionally
+    const dashboardHref = user?.role ? `/dashboard/${user.role}` : "/login";
+
     const getLinkClass = (path, baseClasses) => {
-        const isActive = pathname === path;
-        // If active: highlights with tech teal text and an amber-tinted background node
+        const isActive = pathname === path || pathname.startsWith(path + '/');
         return `${baseClasses} ${isActive ? 'text-teal-400 bg-emerald-950 font-semibold' : 'hover:bg-emerald-800 text-stone-200'}`;
     };
 
@@ -70,7 +70,17 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1 font-medium gap-2">
                     <li><Link href="/" className={getLinkClass('/', 'rounded-lg transition-colors px-4 py-2 block')}>Home</Link></li>
                     <li><Link href="/properties" className={getLinkClass('/properties', 'rounded-lg transition-colors px-4 py-2 block')}>All Properties</Link></li>
-                    {isLoggedIn && <li><Link href="/dashboard" className={getLinkClass('/dashboard', 'rounded-lg transition-colors px-4 py-2 block')}>Dashboard</Link></li>}
+                    {/* Dynamic dashboard navigation link */}
+                    {isLoggedIn && (
+                        <li>
+                            <Link
+                                href={dashboardHref}
+                                className={getLinkClass(`/dashboard/${user?.role}`, 'rounded-lg px-4 py-2 block')}
+                            >
+                                Dashboard
+                            </Link>
+                        </li>
+                    )}
                 </ul>
             </div>
 
@@ -101,8 +111,8 @@ const Navbar = () => {
                                     <Link href="/profile" className={getLinkClass('/profile', 'justify-between')}>
                                         Profile
                                         <span className={`badge border-none font-bold text-xs ${user?.role === 'admin' ? 'bg-amber-400 text-stone-900' :
-                                                user?.role === 'owner' ? 'bg-teal-400 text-stone-900' :
-                                                    'bg-stone-500 text-stone-100' // Default style for tenant
+                                            user?.role === 'owner' ? 'bg-teal-400 text-stone-900' :
+                                                'bg-stone-500 text-stone-100' // Default style for tenant
                                             }`}>
                                             {user?.role === 'admin' && 'Admin'}
                                             {user?.role === 'owner' && 'Owner'}
