@@ -62,7 +62,7 @@ export function BookNowModal({ property }) {
                 <Modal.Container placement="auto">
                     <Modal.Dialog className="sm:max-w-xl bg-emerald-900 text-stone-100 border border-emerald-800 rounded-3xl shadow-2xl">
                         <Modal.CloseTrigger className="text-stone-400 hover:text-white" />
-                        
+
                         <Modal.Header>
                             <Modal.Heading className="text-white font-black text-2xl tracking-tight">
                                 Reserve {property.title}
@@ -71,7 +71,7 @@ export function BookNowModal({ property }) {
 
                         <Modal.Body className="p-6">
                             <form onSubmit={handleBookingSubmit} className="space-y-5">
-                                
+
                                 {/* 1. Move-in Date picker */}
                                 <TextField name="moveInDate" type="date" isRequired>
                                     <Label className="text-stone-300 text-xs font-bold uppercase tracking-wider mb-1.5 block">Target Move-in Date</Label>
@@ -101,13 +101,14 @@ export function BookNowModal({ property }) {
 
                                 {/* Submission CTA block wrapper */}
                                 <div className="pt-3 border-t border-emerald-800/60">
-                                    <Button
-                                        type="submit"
-                                        slot="close"
-                                        className="w-full bg-teal-500 hover:bg-teal-600 text-stone-900 font-extrabold py-3.5 text-base rounded-xl shadow-md tracking-wide transition-all active:scale-[0.99]"
-                                    >
-                                        Confirm Reservation Request
-                                    </Button>
+                                    <form action="/api/checkout_sessions" method="POST">
+                                        <section>
+                                            <button type="submit" role="link"
+                                            className="w-full bg-teal-500 hover:bg-teal-600 text-stone-900 font-extrabold py-3.5 text-base rounded-xl shadow-md tracking-wide transition-all active:scale-[0.99]">
+                                                Checkout
+                                            </button>
+                                        </section>
+                                    </form>
                                 </div>
 
                             </form>

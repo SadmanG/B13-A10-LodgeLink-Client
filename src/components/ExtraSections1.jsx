@@ -7,25 +7,25 @@ const ExtraSections1 = () => {
             name: "Blue Ridge Cabins",
             region: "Georgia, USA",
             propertiesCount: 142,
-            image: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            image: "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1777818591003-8dc9cffdf68f%3Fw%3D600%26auto%3Dformat%26fit%3Dcrop%26q%3D60%26ixlib%3Drb-4.1.0%26ixid%3DM3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%253D%253D&w=640&q=75"
         },
         {
             name: "Alpine Hideaways",
             region: "Zermatt, Switzerland",
             propertiesCount: 89,
-            image: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            image: "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1777818591003-8dc9cffdf68f%3Fw%3D600%26auto%3Dformat%26fit%3Dcrop%26q%3D60%26ixlib%3Drb-4.1.0%26ixid%3DM3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%253D%253D&w=640&q=75"
         },
         {
             name: "Lakeside Retreats",
             region: "Alberta, Canada",
             propertiesCount: 114,
-            image: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            image: "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1777818591003-8dc9cffdf68f%3Fw%3D600%26auto%3Dformat%26fit%3Dcrop%26q%3D60%26ixlib%3Drb-4.1.0%26ixid%3DM3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%253D%253D&w=640&q=75"
         },
         {
             name: "Pacific Eco-Lodges",
             region: "Oregon Coast, USA",
             propertiesCount: 76,
-            image: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            image: "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1777818591003-8dc9cffdf68f%3Fw%3D600%26auto%3Dformat%26fit%3Dcrop%26q%3D60%26ixlib%3Drb-4.1.0%26ixid%3DM3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%253D%253D&w=640&q=75"
         }
     ];
 
